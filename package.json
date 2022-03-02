@@ -4,6 +4,7 @@
   "description": "An API and database for the products section of project-catwalk",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
