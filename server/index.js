@@ -30,7 +30,7 @@ app.get('/products/:product_id', (req, res) => {
   const productId = req.params.product_id;
   db.getProductById(productId)
   .then((data) => {
-    console.log(data.rows[0]);
+    // console.log(data.rows[0]);
     res.status(200).send(data.rows[0].products);
   })
   .catch((error) => {
@@ -45,7 +45,7 @@ app.get('/products/:product_id/styles', (req, res) => {
   const productId = req.params.product_id;
   db.getStylesById(productId)
   .then((data) => {
-    console.log(data.rows[0]);
+    // console.log(data.rows[0]);
     res.status(200).send(data.rows[0].products);
   })
   .catch((error) => {
@@ -55,6 +55,20 @@ app.get('/products/:product_id/styles', (req, res) => {
 })
 
 // GET /products/:product_id/related
+app.get('/products/:product_id/related', (req, res) => {
+  // console.log(req.params)
+  const productId = req.params.product_id;
+  db.getRelatedProducts(productId)
+  .then((data) => {
+    // console.log(data.rows[0]);
+    res.status(200).send(data.rows);
+  })
+  .catch((error) => {
+    console.log(error);
+    res.status(404).send('Sorry, couldn\'t find that for you.')
+  })
+})
+
 // GET /cart
 // POST /cart
 
