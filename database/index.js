@@ -12,15 +12,22 @@ const getProductById = (productId = 1) => {
 };
 
 const getStylesById = (productId = 1) => {
-  const photosQuery = `(SELECT json_agg(phot)
+  const photosQuery = `
+  (SELECT json_agg(phot)
   FROM (
     SELECT thumbnail_url, url
     FROM photos WHERE s.id = styleId)
   phot) as photos`
 
-  const skusQuery = `(SELECT json_object_agg( sk.id, json_build_object('quantity', sk.quantity, 'size', sk.size)) as skus FROM skus sk WHERE sk.styleId = s.id)`
+  const skusQuery = `
+  (SELECT json_object_agg(
+    skus.id, json_build_object(
+      'quantity', skus.quantity, 'size', skus.size
+      ))
+      as skus FROM skus WHERE skus.styleId = s.id)`
 
-  const stylesQuery = `SELECT row_to_json(prod) as products
+  const stylesQuery = `
+  SELECT row_to_json(prod) as products
   FROM (
     SELECT p.id,
     (SELECT json_agg(sty)
@@ -34,12 +41,13 @@ const getStylesById = (productId = 1) => {
 };
 
 const getRelatedProducts = (productId = 1) => {
-  console.log("Related products");
+  return pool.query('SELECT related_product_id FROM related WHERE current_product_id = $1', [productId]);
 }
 
 module.exports = {
   pool: pool,
   getProducts: getProducts,
   getProductById: getProductById,
-  getStylesById: getStylesById
+  getStylesById: getStylesById,
+  getRelatedProducts: getRelatedProducts
 }

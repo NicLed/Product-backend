@@ -60,8 +60,13 @@ app.get('/products/:product_id/related', (req, res) => {
   const productId = req.params.product_id;
   db.getRelatedProducts(productId)
   .then((data) => {
-    // console.log(data.rows[0]);
-    res.status(200).send(data.rows);
+    const relatedProducts = [];
+
+    data.rows.forEach((row) => {
+      relatedProducts.push(row.related_product_id);
+    });
+
+    res.status(200).send(relatedProducts);
   })
   .catch((error) => {
     console.log(error);
