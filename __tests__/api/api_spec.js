@@ -5,30 +5,30 @@ const frisby = require('frisby');
 //     .expect('status', 418);
 // });
 
-it ('GET should return a status of 200 OK', function () {
+it ('GET /products should return a status of 200 OK', function () {
   return frisby
-    .get('http://localhost:3000/products')
+    .get('http://localhost:3030/products')
     .expect('status', 200)
-    .inspectJSON();
+    // .inspectJSON();
 });
 
-it ('GET should return a status of 200 OK', function () {
+it ('GET /products/:product_id should return a status of 200 OK', function () {
   return frisby
-    .get('http://localhost:3000/products/1')
+    .get('http://localhost:3030/products/1')
     .expect('status', 200)
-    .inspectJSON();
+    // .inspectJSON();
 });
 
-it ('GET should return a status of 200 OK', function () {
+it ('GET /products/:product_id/styles should return a status of 200 OK', function () {
   return frisby
-    .get('http://localhost:3000/products/1/styles')
+    .get('http://localhost:3030/products/1/styles')
     .expect('status', 200)
-    .inspectJSON();
+    // .inspectJSON();
 });
 
-it ('GET should return a status of 200 OK', function () {
+it ('GET /products/:product_id/related should return a status of 200 OK', function () {
   return frisby
-    .get('http://localhost:3000/products/1/related')
+    .get('http://localhost:3030/products/1/related')
     .expect('status', 200)
     .inspectJSON();
 });

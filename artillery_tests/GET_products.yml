@@ -1,0 +1,25 @@
+config:
+  target: "http://localhost:3030"
+  phases:
+    - duration: 30
+      arrivalRate: 550
+      name: Products stress
+
+scenarios:
+  - name: "Get products"
+    flow:
+      - get:
+          url: "/products"
+  - name: "Get product by id"
+    flow:
+      - get:
+          url: "/products/1"
+  - name: "Get styles by id"
+    flow:
+      - get:
+          url: "/products/1/styles"
+  - name: "Get related products"
+    flow:
+      - get:
+          url: "/products/1/related"
+
