@@ -9,5 +9,3 @@ The products service of the Atelier API
  - AWS
  - Artillery
  - Loader.io
-
-## Performance
